@@ -35,6 +35,7 @@ import AddConductor from "../pages/BusPages/AddConductor/AddConductor";
 import RouteTimetable from "../pages/BusPages/AllRouteTimetable/AllRouteTimetable";
 import OwnerBusDetails from "../pages/BusPages/BusDetails/OwnerBusDetails";
 import OwnerOview from "../pages/BusPages/Overview/OwnerOview";
+import GoogleAuth from "../pages/AuthenticationPages/GoogleAuth";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='*' element={<NotFound />} />
+        <Route path='/googleauth' element={<GoogleAuth />} />
         <Route path='/test' element={<Test />} />
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
@@ -62,6 +64,7 @@ function App() {
         <Route path='/bookingsuccess' element={<BookingSuccess />} />
         <Route path='/editprofile' element={<EditProfile />} />
         <Route path='/book' element={<FutureBooking />} /> 
+        
         {/* check /book */}
 
         {/* Conductor Pages */}
