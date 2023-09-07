@@ -8,7 +8,8 @@ import LockIcon from '@mui/icons-material/Lock';
 import { Link, useNavigate } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Button } from '@mui/material';
-
+import GoogleAuth from './GoogleAuth';
+import './Authentication.css'
 
 
 const Login = () => {
@@ -43,8 +44,10 @@ const Login = () => {
 
         <div className="text-content d-flex flex-column align-items-center mt-3">
         <Button fullWidth className='mb-4 mt-3 bg-primary' variant="contained" size='large' onClick={handleLogin}>Login</Button>
+        {/* <Link to={'/googleauth'} className='d-flex align-items-center mb-5'> <GoogleIcon/>Sign in with Google</Link> */}
+        <GoogleAuth className='rounded mb-4 mt-3 bg-primary containauth'  />
         <Link className='mb-4' to={'/'}>Forgot Password?</Link>
-        <Link to={'/'} className='d-flex align-items-center mb-5'> <GoogleIcon/>Sign in with Google</Link>
+
         <p>Dont have an account? <Link to={'/register'}>SignUp</Link></p>
         </div>
         

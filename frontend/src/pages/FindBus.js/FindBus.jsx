@@ -3,6 +3,7 @@ import './FindBus.css'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import TopNavBar from '../../components/TopNavBar';
 
 const FindBus = () => {
 
@@ -17,6 +18,7 @@ const FindBus = () => {
 
     return (
         <div className="findBusContainer">
+            <TopNavBar header={'Find Bus'} />
             <div className="findBusContents">
 
                 {/* Find bus form */}
