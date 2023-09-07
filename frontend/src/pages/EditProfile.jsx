@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './UserProfile/UserProfile.css'
 import PersonIcon from '@mui/icons-material/Person';
 import CallIcon from '@mui/icons-material/Call';
@@ -9,8 +9,29 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import TopNavBar from '../components/TopNavBar';
+import Cookies from 'js-cookie'
 
 const EditProfile = () => {
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        contactNumber: '',
+        gender: '',
+        userType: '',
+        email: '',
+        password: '',
+        Image: ''
+    });
+
+    useEffect(() => {
+
+        const user = Cookies.get('user');
+        if (user) {
+            setUser(user);
+        }
+        
+    }, [])
+
     return (
         <div className="userProfileContainer">
             <TopNavBar header={'Edit Profile'} />
@@ -33,6 +54,7 @@ const EditProfile = () => {
                             label="Name"
                             type="text"
                             variant="standard"
+                            value={user.firstName}
                         />
                     </div>
 
@@ -43,6 +65,7 @@ const EditProfile = () => {
                             label="Contact Number"
                             type="text"
                             variant="standard"
+                            value={user.contactNumber}
                         />
                     </div>
 
@@ -53,6 +76,7 @@ const EditProfile = () => {
                             label="Email"
                             type="text"
                             variant="standard"
+                            value={user.email}
                         />
                     </div>
 
@@ -63,6 +87,7 @@ const EditProfile = () => {
                             label="Password"
                             type="password"
                             variant="standard"
+                            value={user.password}
                         />
                     </div>
                 </div>
