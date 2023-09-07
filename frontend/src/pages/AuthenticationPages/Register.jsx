@@ -7,16 +7,21 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Alert } from '@mui/material';
 
 const Register = () => {
 
   const [gender, setGender] = useState('Male');
+  const [location, setLocation] = useState('Matara')
   const [userType, setUserType] = useState('Passenger');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [contactNo, setContact] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -48,14 +53,37 @@ const Register = () => {
   const handleGender = (event) => {
     setGender(event.target.value);
   };
+  const handleLocation = (event) => {
+    setLocation(event.target.value);
+  };
 
   const handleUserType = (event) => {
     setUserType(event.target.value);
   };
 
-  const handleSubmit = (e)=>{
+  const handleSubmit =async (e)=>{
     e.preventDefault();
-    console.log(passwordsMatch);
+    const data = {
+      firstName: firstName,
+      lastName : lastName,
+      contactNumber: contactNo,
+      gender: gender,
+      userType: userType,
+      email: email,
+      password: password,
+      Image: ''
+    }
+
+    try {
+    const a = await axios.post(`http://localhost:10000/user/create`, data)
+    const {user, token} = a.data;
+    navigate('/login')
+
+    } catch (er) {
+      console.error('Registration error:', er);
+      setError(er.response.data.error)
+    }
+
   }
 
 
@@ -68,7 +96,9 @@ const Register = () => {
             </div>
             <div className="regDetails">
               <h4>User Registration</h4>
-
+              {
+                error ? <Alert severity="error">{error}</Alert> : ''
+              }
               <div className="fullName">
                 <TextField id="outlined-basic1" label="First Name" variant="outlined" required onChange={e=> setFirstName(e.target.value)} value={firstName}/>
                 <TextField id="outlined-basic2" label="Last Name" variant="outlined" required onChange={e=> setLastName(e.target.value)} value={lastName}/>
@@ -94,15 +124,15 @@ const Register = () => {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Home</InputLabel>
                 <Select
-                  labelId="gender"
-                  id="gender"
-                  value={gender}
-                  label="Gender"
-                  onChange={handleGender}
+                  labelId="location"
+                  id="location"
+                  value={location}
+                  label="Location"
+                  onChange={handleLocation}
                   required
                 >
-                  <MenuItem value='Male'>Matara</MenuItem>
-                  <MenuItem value='Female'>Weligama</MenuItem>
+                  <MenuItem value='Matara'>Matara</MenuItem>
+                  <MenuItem value='Weligama'>Weligama</MenuItem>
                 </Select>
               </FormControl>
 
