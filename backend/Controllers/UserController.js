@@ -40,29 +40,29 @@ export const registerUser = async(req,res)=>{
     }
 }
 
-//loginUser
+// //loginUser
 
-export const loginUser = async(req,res)=>{
-    const{email,password} = req.body
+// export const loginUser = async(req,res)=>{
+//     const{email,password} = req.body
 
-    const user = await UserModel.findOne({email})
-    const match = bcrypt.compare(password,user.password)
-    try{
-        if(!user){
-            throw Error('*Email does not exist!')
-        }if(!email || !password){
-            throw Error('*All fields must be filled!')
-        }if(!match){
-            throw Error('*Username or password is incorrect!')
-        }else{
-            const token = createToken(user._id)
-            res.status(200).json({user,token})
-        }
+//     const user = await UserModel.findOne({email})
+//     const match = bcrypt.compare(password,user.password)
+//     try{
+//         if(!user){
+//             throw Error('*Email does not exist!')
+//         }if(!email || !password){
+//             throw Error('*All fields must be filled!')
+//         }if(!match){
+//             throw Error('*Username or password is incorrect!')
+//         }else{
+//             const token = createToken(user._id)
+//             res.status(200).json({user,token})
+//         }
 
-    }catch(error){
-        res.status(500).json({error:error.message})
-    }
-}
+//     }catch(error){
+//         res.status(500).json({error:error.message})
+//     }
+// }
 
 // View All Passengers(Admin)
 export const viewAllPassenger = async(req,res)=>{
@@ -122,7 +122,41 @@ export const viewUser= async(req,res)=>{
     console.error(error);
     res.status(500).json({ message: 'Server Error' });
   }
-};
+    
+    }
+
+  
+// User login
+export const LoginUser= async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      // Check if the user exists
+      const user = await UserModel.findOne({ email });
+        // Compare the provided password with the stored password
+        const isMatch = await bcrypt.compare(password, user.password);
+      if(!user){
+                    throw Error('*Email does not exist!')
+                }if(!email || !password){
+                    throw Error('*All fields must be filled!')
+                }if(!isMatch){
+                    throw Error('*Username or password is incorrect!')
+                }else{
+                    const token = createToken(user._id)
+                    res.status(200).json({user,token})
+                }
+        
+            }catch(error){
+                res.status(500).json({error:error.message})
+            }
+     
+  
+    
+  
+     
+    }
+
+
 
         
 
