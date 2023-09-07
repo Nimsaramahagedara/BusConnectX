@@ -134,12 +134,14 @@ export const LoginUser= async (req, res) => {
       // Check if the user exists
       const user = await UserModel.findOne({ email });
         // Compare the provided password with the stored password
-        const isMatch = await bcrypt.compare(password, user.password);
       if(!user){
                     throw Error('*Email does not exist!')
                 }if(!email || !password){
                     throw Error('*All fields must be filled!')
-                }if(!isMatch){
+                }
+                const isMatch = await bcrypt.compare(password, user.password);
+
+                if(!isMatch){
                     throw Error('*Username or password is incorrect!')
                 }else{
                     const token = createToken(user._id)

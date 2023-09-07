@@ -12,11 +12,15 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { Button } from '@mui/material';
 import GoogleAuth from './GoogleAuth';
 import './Authentication.css'
+import Cookies from 'js-cookie';
+import { Alert } from '@mui/material';
 
 
 const Login = () => {
   const [email , setEmail] = useState('');
   const [password , setPassword] = useState('');
+  const [error, setError] = useState('');
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,6 +33,9 @@ const Login = () => {
       });
       console.log(response.data.password)
 
+      Cookies.set('user', response.data.user);
+      Cookies.set('token', response.data.token);
+
       // Reset the form fields
       // setEmail('');
       // setPassword('');
@@ -37,6 +44,7 @@ const Login = () => {
       navigate('/dashboard');
     } catch (error) {
       console.error(error);
+      setError(error.response.data.error);
     }
   };
   return (
@@ -47,6 +55,9 @@ const Login = () => {
         <div className="imgContainer mb-0 mt-5">
           <img src = {blackLogo} alt = '' />
         </div>
+        {
+                error ? <Alert severity="error">{error}</Alert> : ''
+              }
 
         {/* Button & company Container */}
         <form action="" className='loginform mt-4' >
