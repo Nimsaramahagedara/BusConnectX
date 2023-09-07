@@ -1,0 +1,26 @@
+.mantine-gszoqu{
+    padding: 25px!important;
+}
+
+.mantine-kcpopt{
+    padding: 25px!important;
+}
+
+.mantine-5xkobz{
+    padding: 15px!important;
+    text-align: center!important;
+}
+
+.timeInput{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 1rem;
+}
+
+.timeInput>div{
+    width: 100%;
+}
+
+.mantine-nvp2ai{
+    padding: 25px!important;
+}

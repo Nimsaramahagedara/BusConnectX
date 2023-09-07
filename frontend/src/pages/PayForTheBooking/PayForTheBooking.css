@@ -1,0 +1,86 @@
+.payForTheBookingContents{
+    padding: 10px 0px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.headingContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.bookingContents{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.bookingDetails{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    align-items: center;
+    font-size: 18px;
+}
+
+.bookingDetails>span:nth-of-type(1){
+    font-weight: bold;
+}
+
+.ticketPrice{
+    background: var(--secondaryColor);
+    padding: 10px 2rem;
+    color: black;
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    font-size: 20px;
+}
+
+.bookingPaymentSelect{
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+    align-items: center;
+    display: grid;
+    border-radius: 8px;
+    grid-template-columns: 3fr 5fr;
+    gap: 10px;
+    box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+.bookingCardImage{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.bookingCardImage>img{
+    width: 60%;
+}
+
+.bookingCardDetails{
+    display: flex;
+    flex-direction: column;
+    /* gap: 0.2rem; */
+    align-items: center;
+    justify-content: center;
+}
+
+.bookingCardDetails>span:nth-of-type(2){
+    font-weight: bold;
+}
+
+.bookingButtonsContainer{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+

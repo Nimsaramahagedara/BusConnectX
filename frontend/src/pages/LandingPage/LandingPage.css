@@ -1,0 +1,49 @@
+.landingPageContainer{
+    background-color: white;
+    color: var(--secondaryColor);
+}
+
+.landingPageContents{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.landingPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    margin: 0;
+}
+
+.imgContainer{
+    height: 30vh;
+    width: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.imgContainer>img{
+    width: 100%;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    bottom: 7%;
+}
+.details span{
+    margin-top: 1rem;
+}
+

@@ -1,0 +1,51 @@
+
+.regImageContainer{
+    width: 200px;
+    margin-top: 50px;
+}
+
+.regImageContainer>img{
+    width: inherit;
+}
+
+.regDetailsContainer{
+    width: 85%;
+    margin: 0% auto;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.regDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.regDetails>h4{
+    color: var(--secondaryColor);
+}
+
+.fullName{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.buttonContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.haveAccount{
+    display: flex;
+}
+
+.haveAccount>span:nth-of-type(1){
+    color: var(--secondaryColor);
+}

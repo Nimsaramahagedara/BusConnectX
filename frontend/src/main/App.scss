@@ -1,0 +1,59 @@
+@import 'custom';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.gap-10{
+    gap: 10px;
+}
+.gap-5p{
+    gap: 5px;
+}
+.gap-15{
+    gap: 15px;
+}
+.row-gap-10{
+    row-gap: 20px !important;
+}
+/* background-color: var(--cardColor); */
+
+:root {
+    --primaryColor: #6528F7;
+    --secondaryColor: #A076F9;
+    --thirdColor: #D7BBF5;
+    --fourthColor: #EDE4FF;
+    --greenColor:rgb(66, 163, 66);
+}
+.back-primary{
+    background-color: var(--primaryColor) !important;
+}
+.back-secondary{
+    background-color: var(--secondaryColor) !important;
+}
+.back-cancel{
+    background-color: rgb(230, 21, 21) !important;
+    color: white;
+}
+a{
+    text-decoration: none !important;
+    color: var(--primaryColor);
+}
+.custom-hidden {
+    visibility: hidden !important; /* Use !important to override Bootstrap classes */
+  }
+  .active-seat{
+    background-color: green !important;
+  }
+
+.outlinedBtn{
+    border: 1px solid var(--primaryColor)!important;
+    color: var(--primaryColor)!important;
+    background: white;
+}
+.ratio{
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}

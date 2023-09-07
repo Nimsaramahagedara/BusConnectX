@@ -1,0 +1,45 @@
+.seat-box{
+    width: 15% !important;
+    aspect-ratio: 1/1 !important;
+}
+.seat-box:hover{
+ /*   background-color: var(--greenColor) !important;*/
+}
+.row > *{
+    width: unset;
+}
+.small-circle1::before{
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: -15px;
+    top: 5px;
+    background-color:green;
+}
+.small-circle2::before{
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: -15px;
+    top: 5px;
+    background-color: var(--primaryColor);
+}
+.small-circle3::before{
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: -15px;
+    top: 5px;
+    background-color: var(--fourthColor);
+}
+
+/*SEAT PICKER*/
+.seat-picker__row__number{
+    width: 10px;
+}

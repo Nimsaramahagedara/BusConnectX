@@ -1,0 +1,30 @@
+$theme-colors: (
+  'primary': #6528F7,
+  'secondary': #A076F9,
+  'info': #EDE4FF,
+  'danger': teal,
+  'cancel': rgb(230, 21, 21),
+);
+
+/* import bootstrap to set changes */
+@import '~bootstrap/scss/bootstrap';
+
+/*.text-primary
+
+.text-secondary
+
+.text-success
+
+.text-danger
+
+.text-warning
+
+.text-info
+
+.text-light
+
+.text-dark
+
+.text-muted
+
+.text-white*/

@@ -1,0 +1,95 @@
+.allBookingsContents{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 3rem;
+    min-height: 92vh;
+    padding: 20px;
+    gap: 1rem;
+}
+
+.allBookingsBtn{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.recentBookings{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.recentTitles{
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.recentContents{
+    padding: 10px;
+    box-shadow: 3px 3px 5px 6px #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 8px;
+}
+
+.bookingBusTitle{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 15px;
+    align-items: center;
+}
+
+.bookingBusTitle>img{
+    width: 10vh;
+    height: 7vh;
+}
+
+.routeSpan{
+    background: #9c9c9c;
+    padding: 6px;
+    color: white;
+    justify-content: center;
+}
+
+.bookingBusRoute{
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bookingBusRoute>span:nth-of-type(2){
+    color: green;
+}
+
+.recentContents>span{
+    text-align: center;
+    color: var(--primaryColor);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.completetionTag{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.completetionTag>span:nth-of-type(2){
+    color: white;
+    background: rgb(36, 207, 20);
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.completedBookings{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: auto;
+    width: 100%;
+}

@@ -1,0 +1,23 @@
+.dash-box{
+    min-width: 150px;
+    max-width: 40%;
+    aspect-ratio: 1/1;
+    background-color: rgba(255, 255, 255, 0.342);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0,0.3);
+    transition: 0.3;
+}
+.dash-box:hover{
+    background-color: rgba(255, 255, 255,0.8);
+}
+.dash-box:hover > h5{
+    color: black !important;
+}
+
+@media screen and (min-width: 600px) {
+    .dash-box{
+        max-width: 200px;
+    }
+}

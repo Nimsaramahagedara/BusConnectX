@@ -1,0 +1,20 @@
+.mantine-j3jbtx{
+    position: fixed!important;
+    top: 20%!important;
+    transform: translateY(-10%);
+}
+
+.createBookingModal{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.bookingInputData{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+

@@ -1,0 +1,19 @@
+.logoContainer{
+    width: 250px;
+    height: 100px;
+}
+.dash-container{
+    background-image: url('../images/dash-bg-image.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: border-box;
+    min-height: 100vh;
+}
+
+@media screen and (min-width: 800px) {
+    .dash-container{
+        background-size: contain;
+        background-repeat: repeat-x;
+    }  
+}
