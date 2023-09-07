@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import router from "../Routes/UserRoutes.js";
 import { response } from "express";
+import { AuthenticateId } from "../Utils/AuthenticateId.js";
 
 const createToken = (_id)=>{
     return jwt.sign({_id}, process.env.SECRET, {expiresIn:'3d'})
@@ -80,7 +81,6 @@ export const viewAllPassenger = async(req,res)=>{
 
 export const viewUser= async(req,res)=>{
     const id = req.params.id
-
     try{
         const user = await UserModel.findById(id)
         res.status(200).json(user)
