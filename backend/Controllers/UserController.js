@@ -13,9 +13,7 @@ const createToken = (_id)=>{
 export const registerUser = async(req,res)=>{
 
     const{firstName, lastName, contactNumber, gender, userType, email, password, image} = req.body
-    if(image == ''){
-        image = 'Null';
-    }
+
     const exists = await UserModel.findOne({email})
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password,salt)
@@ -38,7 +36,7 @@ export const registerUser = async(req,res)=>{
         }
 
     }catch(error){
-        res.status(401).json({error:error.message})
+        res.status(500).json({error:error.message})
     }
 }
 
@@ -87,25 +85,34 @@ export const viewUser= async(req,res)=>{
     }catch(error){
         res.status(500).json({error:error.message})
     }
+}
 
     //update user 
-    router.put('/update/:id', async(req,res)=>{
+    export const editUser=async(req,res)=>{
         try{
-            const { userId } = req.params;
-    const { name, email } = req.body;
-    res.json({ userId, name, email });
-    console.log(response)
+    const { id } = req.params;
+    const { firstName, email, lastName, contactNumber, gender, userType,  password, image} = req.body;
+   // res.json({ userId, firstName, email });
+   // console.log(response)
 
     // Find the user by ID
-    const user = await User.findById(userId);
-
+    const user = await UserModel.findById(id);
+            console.log(user)
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
     // Update user profile
-    user.name = name;
+    user.firstName = firstName;
     user.email = email;
+    user.lastName = lastName;
+    user.contactNumber = contactNumber;
+    user.gender=gender;
+    user.userType=userType;
+    user.password=password;
+    user.image=image;
+
+
 
     // Save the updated user
     await user.save();
@@ -115,7 +122,9 @@ export const viewUser= async(req,res)=>{
     console.error(error);
     res.status(500).json({ message: 'Server Error' });
   }
-});
-        }
+};
+
+        
+
     
 
