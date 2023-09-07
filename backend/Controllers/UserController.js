@@ -11,7 +11,9 @@ const createToken = (_id)=>{
 export const registerUser = async(req,res)=>{
 
     const{firstName, lastName, contactNumber, gender, userType, email, password, image} = req.body
-
+    if(image == ''){
+        image = 'Null';
+    }
     const exists = await UserModel.findOne({email})
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password,salt)
@@ -34,7 +36,7 @@ export const registerUser = async(req,res)=>{
         }
 
     }catch(error){
-        res.status(500).json({error:error.message})
+        res.status(401).json({error:error.message})
     }
 }
 

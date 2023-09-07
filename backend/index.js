@@ -2,10 +2,13 @@ import mongoose from "mongoose";
 import express from 'express'
 import dotenv from 'dotenv'
 import user from './Routes/UserRoutes.js'
+import cors from 'cors';
+import morgan from "morgan";
 
 const app = express()
 app.use(express.json())
-
+app.use(cors());
+app.use(morgan('dev'));
 dotenv.config()
 
 mongoose.connect(process.env.DB, {
