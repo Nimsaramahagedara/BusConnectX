@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import user from './Routes/UserRoutes.js'
 import cors from 'cors';
 import morgan from "morgan";
+import BusRouter from "./Routes/BusRoutes.js";
 
 const app = express()
 app.use(express.json())
@@ -18,3 +19,4 @@ mongoose.connect(process.env.DB, {
 .catch((err)=>console.log(err))
 
 app.use('/user', user)
+app.use('/bus', BusRouter)

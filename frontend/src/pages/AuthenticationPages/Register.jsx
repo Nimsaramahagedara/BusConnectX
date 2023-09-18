@@ -15,7 +15,7 @@ const Register = () => {
 
   const [gender, setGender] = useState('Male');
   const [location, setLocation] = useState('Matara')
-  const [userType, setUserType] = useState('Passenger');
+  const [userType, setUserType] = useState('passenger');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [contactNo, setContact] = useState('');
@@ -75,7 +75,7 @@ const Register = () => {
     }
 
     try {
-    const a = await axios.post(`http://localhost:10000/user/create`, data)
+    const a = await axios.post(`${process.env.REACT_APP_BASE_URL}user/create`, data)
     const {user, token} = a.data;
     navigate('/login')
 
@@ -136,7 +136,7 @@ const Register = () => {
                 </Select>
               </FormControl>
 
-              {/* <FormControl fullWidth>
+             <FormControl fullWidth>
                 <InputLabel id="userType">User Type</InputLabel>
                 <Select
                   labelId="userType"
@@ -146,10 +146,10 @@ const Register = () => {
                   onChange={handleUserType}
                   required
                 >
-                  <MenuItem value='Passenger'>Passenger</MenuItem>
-                  <MenuItem value='Bus'>Bus</MenuItem>
+                  <MenuItem value='passenger'>Passenger</MenuItem>
+                  <MenuItem value='owner'>Bus Owner</MenuItem>
                 </Select>
-              </FormControl> */}
+              </FormControl>
 
               <TextField fullWidth id="outlined-basic4" label="Email" variant="outlined" onChange={e=> setEmail(e.target.value)} value={email}/>
 

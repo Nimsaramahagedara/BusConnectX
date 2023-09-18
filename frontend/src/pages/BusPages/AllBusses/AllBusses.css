@@ -1,11 +1,4 @@
 .displayAllBusses {
     display: grid;
     grid-template-columns: 2fr 4fr;
-    box-shadow: 3px 3px 5px 6px #ccc;
-    border-radius: 8px;
-}
-
-.displayAllBusses>img {
-    width: 100%;
-    height: 100%;
 }

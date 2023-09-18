@@ -14,7 +14,7 @@
 .findBusForm{
     padding: 12px;
     border-radius: 8px;
-    box-shadow: 3px 3px 5px 6px #ccc;
+    /*box-shadow: 3px 3px 5px 6px #ccc;*/
     width: 100%;
     text-align: center;
     display: flex;
@@ -49,7 +49,6 @@
     display: grid;
     grid-template-columns: 1.5fr 3fr;
     padding: 10px;
-    box-shadow: 3px 3px 5px 5px #ccc;
     border-radius: 8px;
 
 }

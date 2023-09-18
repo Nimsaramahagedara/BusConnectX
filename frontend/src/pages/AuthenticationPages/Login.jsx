@@ -25,23 +25,30 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   console.log(password)
+
     try {
-      const response = await axios.post('http://localhost:10000/user/login', {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}user/login`, {
         email: email,
         password: password,
       });
-      console.log(response.data.password)
+      // console.log(response.data.password)
 
-      Cookies.set('user', response.data.user);
+      Cookies.set('user',JSON.stringify(response.data.user));
       Cookies.set('token', response.data.token);
 
-      // Reset the form fields
-      // setEmail('');
-      // setPassword('');
+      const {userType} = response.data.user
 
       // Redirect to the dashboard
-      navigate('/dashboard');
+      if(userType == 'passenger'){
+        navigate('/user/dashboard');
+      }else if(userType == 'owner'){
+        navigate('/busDashboard');
+      }else if(userType == 'admin'){
+        navigate('/admin/dashboard');
+      }else if(userType == 'conductor'){
+        navigate('/condashboard');
+      }
+      
     } catch (error) {
       console.error(error);
       setError(error.response.data.error);
