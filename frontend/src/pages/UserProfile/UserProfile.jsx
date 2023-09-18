@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import TopNavBar from '../../components/TopNavBar';
 import axios from 'axios';
 import Cookies from 'js-cookie'
+import Logout from '../AuthenticationPages/Logout';
 
 const UserProfile = () => {
     const [user, setUser] = useState({
@@ -29,9 +30,13 @@ const UserProfile = () => {
 
     useEffect(() => {
 
-        const user = Cookies.get('user');
-        if (user) {
-            setUser(user);
+        try {
+            const user = JSON.parse(Cookies.get('user'));
+            if (user) {
+                setUser(user);
+            }
+        } catch (error) {
+            console.log(error);
         }
 
     }, [])
@@ -72,7 +77,8 @@ const UserProfile = () => {
                 </div>
 
                 <div className="userProfileActionsContainer">
-                    <Button variant="contained" className='editProfileBtn' onClick={profileHandler}>EDIT PROFILE</Button>
+                    <Button variant="contained" className='editProfileBtn mb-3' fullWidth onClick={profileHandler}>EDIT PROFILE</Button>
+                    <Logout/>
                 </div>
             </div>
         </div>

@@ -17,12 +17,13 @@ const FindBus = () => {
     }
 
     return (
+        <>
+        <TopNavBar header={'Find Bus'} />
         <div className="findBusContainer">
-            <TopNavBar header={'Find Bus'} />
             <div className="findBusContents">
 
                 {/* Find bus form */}
-                <div className="findBusForm">
+                <div className="findBusForm shadow">
                     <h2>Find a Bus</h2>
 
                     <div className="findBusInputs">
@@ -41,7 +42,7 @@ const FindBus = () => {
                 <div className="results">
                     <h1>Available Buses</h1>
 
-                    <div className="availableBusContainer" onClick = {busHandler}>
+                    <div className="availableBusContainer shadow" onClick = {busHandler}>
                         <div className="availableBusImage">
                             <img src='https://www.newswire.lk/wp-content/uploads/2023/01/Highway-bus.jpg' alt='' />
                         </div>
@@ -58,7 +59,7 @@ const FindBus = () => {
                     <span style = {{color:'#6528F7'}}>SEE MORE</span>
                 </div>
             </div>
-        </div>
+        </div></>
     )
 }
 

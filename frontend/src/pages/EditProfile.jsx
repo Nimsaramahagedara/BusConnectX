@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import './UserProfile/UserProfile.css'
 import PersonIcon from '@mui/icons-material/Person';
 import CallIcon from '@mui/icons-material/Call';
@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import TopNavBar from '../components/TopNavBar';
 import Cookies from 'js-cookie'
+import authAxios from '../utils/authAxios';
 
 const EditProfile = () => {
     const [user, setUser] = useState({
@@ -22,15 +23,30 @@ const EditProfile = () => {
         password: '',
         Image: ''
     });
-
     useEffect(() => {
 
-        const user = Cookies.get('user');
+        const user = JSON.parse(Cookies.get('user'));
+        user.password = '';
         if (user) {
             setUser(user);
         }
-        
+
     }, [])
+
+    // Handle changes in the input fields and update the state
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value });
+    };
+
+    const handleUpdate = async()=>{
+        try {
+            const res = await authAxios.put(`user/update/${user._id}`,user)
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div className="userProfileContainer">
@@ -50,50 +66,72 @@ const EditProfile = () => {
                     <div className="userDetails">
                         <PersonIcon />
                         <TextField fullWidth
-                            id="standard-password-input"
-                            label="Name"
+                            id="firstName"
+                            label="First Name"
                             type="text"
+                            name='firstName'
                             variant="standard"
                             value={user.firstName}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                    <div className="userDetails">
+                        <PersonIcon />
+                        <TextField fullWidth
+                            id="lastName"
+                            label="Last Name"
+                            type="text"
+                            name='lastName'
+                            variant="standard"
+                            value={user.lastName}
+                            onChange={handleInputChange}
                         />
                     </div>
 
                     <div className="userDetails">
                         <CallIcon />
                         <TextField fullWidth
-                            id="standard-password-input"
+                            id="contactNo"
                             label="Contact Number"
+                            name='contactNumber'
                             type="text"
                             variant="standard"
                             value={user.contactNumber}
+                            onChange={handleInputChange}
                         />
                     </div>
 
                     <div className="userDetails">
                         <EmailIcon />
                         <TextField fullWidth
-                            id="standard-password-input"
+                            id="email"
                             label="Email"
                             type="text"
+                            name='email'
                             variant="standard"
                             value={user.email}
+                            onChange={handleInputChange}
                         />
                     </div>
 
                     <div className="userDetails">
-                        <HttpsIcon />
+                        {/* <HttpsIcon />
                         <TextField fullWidth
-                            id="standard-password-input"
+                            id="password"
                             label="Password"
                             type="password"
                             variant="standard"
+                            name='password'
                             value={user.password}
-                        />
+                            onChange={handleInputChange}
+                        /> */}
+                        
                     </div>
                 </div>
 
                 <div className="userProfileActionsContainer">
-                    <Button fullWidth variant="contained" className='mainBtn'>SAVE</Button>
+                    <Button fullWidth variant="contained" className='mainBtn' onClick={handleUpdate}>SAVE</Button>
+                    <Button onClick={()=>{window.alert('Coming Soon')}}>Change Password</Button>
                 </div>
             </div>
         </div>
