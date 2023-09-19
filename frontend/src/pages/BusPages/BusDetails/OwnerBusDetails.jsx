@@ -57,10 +57,6 @@ const OwnerBusDetails = () => {
                 <div className="col">{bus.from} <br/> {bus.to}</div>
             </div>
             <div className="row p-2">
-                <div className="col">Your Seat</div>
-                <div className="col"><span>44</span> / 49</div>
-            </div>
-            <div className="row p-2">
                 <div className="col">Seats</div>
                 <div className="col"><span>44</span> / 49</div>
             </div>

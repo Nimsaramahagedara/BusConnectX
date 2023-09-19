@@ -53,9 +53,9 @@ const AddConductor = () => {
                     />
 
                     <FormControl fullWidth variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <InputLabel htmlFor="password">Password</InputLabel>
                         <OutlinedInput
-                            id="outlined-adornment-password"
+                            id="password"
                             type={password ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
@@ -74,9 +74,9 @@ const AddConductor = () => {
                     </FormControl>
 
                     <FormControl fullWidth variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <InputLabel htmlFor="Confirmpassword">Confirm Password</InputLabel>
                         <OutlinedInput
-                            id="outlined-adornment-password"
+                            id="Confirmpassword"
                             type={confPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
@@ -90,7 +90,7 @@ const AddConductor = () => {
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            label="Password"
+                            label="Confirm Password"
                         />
                     </FormControl>
 

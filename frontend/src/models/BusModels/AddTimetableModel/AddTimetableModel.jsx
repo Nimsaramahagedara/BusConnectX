@@ -20,9 +20,9 @@ function AddTimetableModel({ modalOpened, setModalOpened }) {
 
     return (
         <Modal
-            overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
-            overlayOpacity={0.10}
-            overlayBlur={1}
+            overlaycolor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
+            overlayopacity={0.10}
+            overlayblur={1}
             size='80%'
             opened={modalOpened}
             onClose={() => setModalOpened(false)}

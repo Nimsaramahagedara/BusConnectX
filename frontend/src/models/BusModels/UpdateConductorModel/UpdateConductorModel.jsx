@@ -25,9 +25,9 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
 
     return (
         <Modal
-            overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
-            overlayOpacity={0.10}
-            overlayBlur={1}
+            overlaycolor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
+            overlayopacity={0.10}
+            overlayblur={1}
             size='80%'
             opened={modalOpened}
             onClose={() => setModalOpened(false)}
@@ -38,28 +38,28 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
                 <div className='d-flex flex-column gap-3'>
 
                     <TextField fullWidth
-                        id="standard-password-input"
+                        id="Name"
                         label="Name"
                         type="text"
                         variant="outlined"
                     />
 
                     <TextField fullWidth
-                        id="standard-password-input"
+                        id="NIC"
                         label="NIC"
                         type="text"
                         variant="outlined"
                     />
 
                     <TextField fullWidth
-                        id="standard-password-input"
+                        id="ContactNo"
                         label="Contact Number"
                         type="text"
                         variant="outlined"
                     />
 
                     <TextField fullWidth
-                        id="standard-password-input"
+                        id="RegNo"
                         label="Reg Number (Optional)"
                         type="text"
                         variant="outlined"
@@ -75,7 +75,7 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
                     <FormControl fullWidth variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
-                            id="outlined-adornment-password"
+                            id="password"
                             type={password ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
@@ -96,7 +96,7 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
                     <FormControl fullWidth variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
                         <OutlinedInput
-                            id="outlined-adornment-password"
+                            id="Confirmpassword"
                             type={confPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">

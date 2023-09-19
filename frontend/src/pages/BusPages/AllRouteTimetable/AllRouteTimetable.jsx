@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import './AllRouteTimetable.css'
 import TopNavBar from '../../../components/TopNavBar'
 import Button from '@mui/material/Button';
 import UpdateTimetableModel from '../../../models/BusModels/UpdateTimetableModel/UpdateTimetableModel';
@@ -23,7 +22,7 @@ const RouteTimetable = () => {
                     <h5>All Routes Timetable</h5>
                 </div>
 
-                <div className='routeUpdBtn mt-2 d-flex gap-2 p-3 justify-content-between align-items-center'>
+                <div className='routeUpdBtn mt-2 d-flex gap-2 p-3 justify-content-between align-items-center shadow rounded'>
                     <div>
                         <h5>Matara - Colombo</h5>
                         <span className='fs-5'>05:00 - 10:30</span>
