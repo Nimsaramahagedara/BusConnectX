@@ -17,8 +17,8 @@ const BusDetails = () => {
   return (
     <div>
     <TopNavBar header={'Bus Details'}/>
-    <div className='bus-detail-container mt-5'>
-        <div className="bus-image mt-5 p-4">
+    <div className='bus-detail-container'>
+        <div className="bus-image p-4">
             <img src={BusPhoto} alt="bus-image" className='' />
         </div>
         <div className="container-lg bus-model d-flex justify-content-between mt-3 p-3">

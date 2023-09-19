@@ -10,6 +10,7 @@ import TopNavBar from '../../components/TopNavBar';
 import axios from 'axios';
 import Cookies from 'js-cookie'
 import Logout from '../AuthenticationPages/Logout';
+import authAxios from '../../utils/authAxios';
 
 const UserProfile = () => {
     const [user, setUser] = useState({
@@ -30,14 +31,20 @@ const UserProfile = () => {
 
     useEffect(() => {
 
-        try {
-            const user = JSON.parse(Cookies.get('user'));
-            if (user) {
-                setUser(user);
+        const getUser = async () => {
+            try {
+                const token = Cookies.get('token');
+                if (token) {
+                    const user =await authAxios.get('/user')
+                    setUser(user.data);
+                } else {
+                    navigate('./login')
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
         }
+        getUser();
 
     }, [])
 
@@ -78,7 +85,7 @@ const UserProfile = () => {
 
                 <div className="userProfileActionsContainer">
                     <Button variant="contained" className='editProfileBtn mb-3' fullWidth onClick={profileHandler}>EDIT PROFILE</Button>
-                    <Logout/>
+                    <Logout />
                 </div>
             </div>
         </div>

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Bus from '../../../images/bus.jpg'
 import './AllBusses.css'
 import AddBusModel from '../../../models/BusModels/AddBusModel/AddBusModel'
-import UpdateConductorModel from '../../../models/BusModels/UpdateConductorModel/UpdateConductorModel'
-import AddTimetableModel from '../../../models/BusModels/AddTimetableModel/AddTimetableModel'
+//import UpdateConductorModel from '../../../models/BusModels/UpdateConductorModel/UpdateConductorModel'
+//import AddTimetableModel from '../../../models/BusModels/AddTimetableModel/AddTimetableModel'
 import { useNavigate } from 'react-router-dom';
 import TopNavBar from '../../../components/TopNavBar'
 import axios from 'axios'
@@ -48,7 +48,7 @@ const AllBusses = () => {
 
                 {
                     allBus.map((bus, index) => (
-                        <EachBus bus={bus}/>
+                        <EachBus bus={bus} key={index}/>
                     ))
                 }
             </div>

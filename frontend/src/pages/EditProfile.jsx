@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 import './UserProfile/UserProfile.css'
 import PersonIcon from '@mui/icons-material/Person';
 import CallIcon from '@mui/icons-material/Call';
@@ -23,13 +24,24 @@ const EditProfile = () => {
         password: '',
         Image: ''
     });
+    const navigate = useNavigate()
+
     useEffect(() => {
 
-        const user = JSON.parse(Cookies.get('user'));
-        user.password = '';
-        if (user) {
-            setUser(user);
+        const getUser = async () => {
+            try {
+                const token = Cookies.get('token');
+                if (token) {
+                    const user =await authAxios.get('/user')
+                    setUser(user.data);
+                } else {
+                    navigate('./login')
+                }
+            } catch (error) {
+                console.log(error);
+            }
         }
+        getUser();
 
     }, [])
 
@@ -42,7 +54,7 @@ const EditProfile = () => {
     const handleUpdate = async()=>{
         try {
             const res = await authAxios.put(`user/update/${user._id}`,user)
-            
+            navigate('../profile')
         } catch (error) {
             console.log(error);
         }

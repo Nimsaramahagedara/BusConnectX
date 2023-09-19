@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material'
 
 const EachBus = ({bus}) => {
-    console.log(bus);
     const {image,busName,routeNo,regNo,from,to} = bus
     const navigate = useNavigate()
     const [addRouteModalOpened, setAddRouteModalOpened] = useState(false)
@@ -18,7 +17,7 @@ const EachBus = ({bus}) => {
     }
 
     const detailsHandler = () => {
-        navigate('/ownerbusdetails')
+        navigate(`/ownerbusdetails/${bus._id}`)
     }
     return (
         <div className='displayAllBusses justify-content-around p-2 shadow rounded'>
