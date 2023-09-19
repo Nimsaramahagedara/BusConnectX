@@ -1,30 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TopNavBar from '../../../components/TopNavBar'
 import BusPhoto from '../../../images/BusPhoto.webp'
 import '../../BusDetails.css';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import authAxios from '../../../utils/authAxios';
 
 const OwnerBusDetails = () => {
 
     const [ratings, setRatings] = useState(5);
     const navigate = useNavigate()
+    const {id} = useParams();
+    const [bus , setBusDetails] = useState({});
 
     const timetableHandler = ()=>{
         navigate('/routeTimetable')
     }
 
+    useEffect(()=>{
+        const getBusDetails = async ()=>{
+            const res = await authAxios.get(`/bus/${id}`)
+            setBusDetails(res.data);
+        }
+
+        getBusDetails()
+    },[])
+
   return (
     
     <div>
     <TopNavBar header={'Bus Details'}/>
-    <div className='bus-detail-container mt-5'>
-        <div className="bus-image mt-5 p-4">
-            <img src={BusPhoto} alt="bus-image" className='' />
+    <div className='bus-detail-container'>
+        <div className="bus-image p-4">
+            <img src={bus.image} alt="bus-image" className='' />
         </div>
         <div className="container-lg bus-model d-flex justify-content-between mt-3 p-3">
-            <strong>Micro Yutong <span>2018</span></strong>
+            <strong>{bus.busName} <span>2018</span></strong>
             <Rating name="read-only" value={ratings} readOnly />
         </div>
         <div className="container-lg mt-3">
@@ -34,15 +46,15 @@ const OwnerBusDetails = () => {
             </div>
             <div className="row p-2">
                 <div className="col">Reg No</div>
-                <div className="col">ND 3030</div>
+                <div className="col">{bus.regNo}</div>
             </div>
             <div className="row p-2">
                 <div className="col">Route No</div>
-                <div className="col">440</div>
+                <div className="col">{bus.routeNo}</div>
             </div>
             <div className="row p-2">
                 <div className="col">Route</div>
-                <div className="col">Panadura <br/> Mahanuwara</div>
+                <div className="col">{bus.from} <br/> {bus.to}</div>
             </div>
             <div className="row p-2">
                 <div className="col">Your Seat</div>

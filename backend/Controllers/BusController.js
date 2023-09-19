@@ -85,20 +85,22 @@ export const deleteBus = async (req, res) => {
 
 //CREATE BUS WITH OWNER
 export const createBusWithOwner = async (req, res) => {
-    if (req.body.image == "") {
-        req.body.image = "https://freepngdownload.com/image/thumb/bus-icon-png.png"
-    }
 
     verifyToken(req).then((ownerId) => {
         req.body.owner = ownerId
     }).catch((error) => {
-        // Handle the error here
         console.error(error);
     });
 
-    const newBus = req.body
-
     try {
+        if(req.body.busName == '' || req.body.regNo == '' || req.body.routeNo == ''){
+            throw Error('Required Fields are missing')
+        }
+        if (req.body.image == "") {
+            req.body.image = "https://freepngdownload.com/image/thumb/bus-icon-png.png"
+        }
+        const newBus = req.body
+
         const { regNo } = newBus;
         const isExist = await BusModel.findOne({ regNo: regNo })
         if (isExist) {
@@ -113,18 +115,20 @@ export const createBusWithOwner = async (req, res) => {
 
 }
 
-//GET ALL BUSSES BELONG TO OWNER
+// GET ALL BUSSES BELONG TO OWNER
 export const getAllBussesOwn = async (req, res) => {
     try {
-        const result = await BusModel.find().populate('owner');
+        const ownerId = await verifyToken(req);
+        const result = await BusModel.find({ 'owner': ownerId });
         if (result) {
             res.status(200).json(result);
         }
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        console.error(error);
+        res.status(400).json({ error: error.message });
     }
+};
 
-}
 
 // Find a Bus and populate the owner field with the Bus owner document
 // Bus.findById(busId)

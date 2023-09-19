@@ -81,7 +81,7 @@ function App() {
         <Route path='/allBusses' element={<AllBusses />} />
         <Route path='/addConductor' element={<AddConductor />} />
         <Route path='/routeTimetable' element={<RouteTimetable />} />
-        <Route path='/ownerbusdetails' element={<OwnerBusDetails />} />
+        <Route path='/ownerbusdetails/:id' element={<OwnerBusDetails />} />
         <Route path='/busOverview' element={<OwnerOview />} />
       </Routes>
     </div>

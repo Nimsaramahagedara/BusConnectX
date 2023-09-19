@@ -10,12 +10,9 @@ import {
     MenuItem,
     FormControl,
     InputLabel,
-    Snackbar
+    Alert
 } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import axios from 'axios';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import authAxios from '../../../utils/authAxios';
 
 function AddBusModel({ modalOpened, setModalOpened }) {
@@ -25,29 +22,21 @@ function AddBusModel({ modalOpened, setModalOpened }) {
     const [from, setFrom] = useState('Matara');
     const [to, setTo] = useState('Colombo');
     const [image, setImage] = useState('');
-    const [open , setOpen] = useState(false)
-    const [alertMessage , setMessage] = useState('')
+    const [open, setOpen] = useState(false)
+    const [alertMessage, setMessage] = useState('')
+    const [valid, setValid] = useState(true);
 
+    const validateInput = (input) => {
+        // Define a regular expression pattern to match the desired format
+        const pattern = /^[A-Z]{2}\s[A-Z]{2}\s\d{4}$/;
+    
+        // Check if the input matches the pattern
+        return pattern.test(input);
+      };
 
     const handleClose = () => {
         setModalOpened(false);
     };
-
-    const action = (
-        <React.Fragment>
-          <Button color="secondary" size="small" onClick={handleClose}>
-            UNDO
-          </Button>
-          <IconButton
-            size="small"
-            aria-label="close"
-            color="inherit"
-            onClick={handleClose}
-          >
-            <CloseIcon fontSize="small" />
-          </IconButton>
-        </React.Fragment>
-      );
 
     const handleFromChange = (event) => {
         setFrom(event.target.value);
@@ -56,6 +45,15 @@ function AddBusModel({ modalOpened, setModalOpened }) {
     const handleToChange = (event) => {
         setTo(event.target.value);
     };
+
+    const handleChange = (e) => {
+        const inputValue = e.target.value;
+        const isValid = validateInput(inputValue);
+    
+        // Update the state and validate
+        setRegNo(inputValue);
+        setValid(isValid);
+      };
 
     const handleSubmit = async () => {
         const newBus = {
@@ -75,9 +73,9 @@ function AddBusModel({ modalOpened, setModalOpened }) {
             setMessage(error.response.data.error)
             setOpen(true)
         }
-        setTimeout(()=>{
+        setTimeout(() => {
             setOpen(false)
-        },2000)
+        }, 2000)
     };
     const handleImageChange = (event) => {
         const selectedImage = event.target.files[0];
@@ -87,6 +85,10 @@ function AddBusModel({ modalOpened, setModalOpened }) {
     return (
         <Dialog open={modalOpened} onClose={handleClose} maxWidth="md" fullWidth>
             <DialogTitle>Add Bus</DialogTitle>
+            {
+                open && <Alert severity="error">{alertMessage}</Alert>
+            }
+
             <DialogContent>
                 <TextField
                     fullWidth
@@ -102,9 +104,11 @@ function AddBusModel({ modalOpened, setModalOpened }) {
                     label="Bus Number"
                     variant="outlined"
                     value={regNo}
-                    onChange={(e) => setRegNo(e.target.value)}
+                    onChange={handleChange}
                     margin="normal"
                     required
+                    error={!valid}
+                    helperText={!valid ? "Invalid format. Use 'AB CD 1234'" : ""}
                 />
                 <TextField
                     fullWidth
@@ -169,13 +173,6 @@ function AddBusModel({ modalOpened, setModalOpened }) {
                     Add Bus
                 </Button>
             </DialogActions>
-            <Snackbar
-                open={open}
-                autoHideDuration={6000}
-                // onClose={handleClose}
-                message= {alertMessage}
-                action={action}
-            />
 
         </Dialog>
     );

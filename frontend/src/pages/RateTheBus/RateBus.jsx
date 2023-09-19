@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TopNavBar from '../../components/TopNavBar'
 import BusPhoto from '../../images/BusPhoto.webp'
-import './BusDetails.css';
+import '../BusDetails.css';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';

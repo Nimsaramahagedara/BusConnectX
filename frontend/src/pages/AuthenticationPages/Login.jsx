@@ -17,8 +17,8 @@ import { Alert } from '@mui/material';
 
 
 const Login = () => {
-  const [email , setEmail] = useState('');
-  const [password , setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
@@ -33,22 +33,22 @@ const Login = () => {
       });
       // console.log(response.data.password)
 
-      Cookies.set('user',JSON.stringify(response.data.user));
+      Cookies.set('user', JSON.stringify(response.data.user));
       Cookies.set('token', response.data.token);
 
-      const {userType} = response.data.user
+      const { userType } = response.data.user
 
       // Redirect to the dashboard
-      if(userType == 'passenger'){
+      if (userType == 'passenger') {
         navigate('/user/dashboard');
-      }else if(userType == 'owner'){
+      } else if (userType == 'owner') {
         navigate('/busDashboard');
-      }else if(userType == 'admin'){
+      } else if (userType == 'admin') {
         navigate('/admin/dashboard');
-      }else if(userType == 'conductor'){
+      } else if (userType == 'conductor') {
         navigate('/condashboard');
       }
-      
+
     } catch (error) {
       console.error(error);
       setError(error.response.data.error);
@@ -60,37 +60,37 @@ const Login = () => {
 
         {/* Image Container */}
         <div className="imgContainer mb-0 mt-5">
-          <img src = {blackLogo} alt = '' />
+          <img src={blackLogo} alt='' />
         </div>
         {
-                error ? <Alert severity="error">{error}</Alert> : ''
-              }
+          error ? <Alert severity="error">{error}</Alert> : ''
+        }
 
         {/* Button & company Container */}
         <form action="" className='loginform mt-4' >
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }} className='mt-3'>
-          
-          <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-          
-          <TextField fullWidth required label="Enter email" helperText='' value={email} variant="standard" onChange={e=>setEmail(e.target.value)}/>
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }} className='mt-3'>
-          <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-          <TextField fullWidth required type='password' helperText='' value={password} label="Enter password" variant="standard" onChange={e=>setPassword(e.target.value)}/>
-        </Box>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end' }} className='mt-3'>
 
-        <div className="text-content d-flex flex-column align-items-center mt-3">
-        <Button fullWidth className='mb-4 mt-3 bg-primary' variant="contained" size='large' onClick={handleSubmit} >Login</Button>
-        {/* <Link to={'/googleauth'} className='d-flex align-items-center mb-5'> <GoogleIcon/>Sign in with Google</Link> */}
-        <GoogleAuth className='rounded mb-4 mt-3 bg-primary containauth'  />
-        <Link className='mb-4' to={'/'}>Forgot Password?</Link>
+            <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
 
-        <p>Dont have an account? <Link to={'/register'}>SignUp</Link></p>
-        </div>
-        
+            <TextField fullWidth required label="Enter email" helperText='' value={email} variant="standard" onChange={e => setEmail(e.target.value)} />
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end' }} className='mt-3'>
+            <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+            <TextField fullWidth required type='password' helperText='' value={password} label="Enter password" variant="standard" onChange={e => setPassword(e.target.value)} />
+          </Box>
+
+          <div className="text-content d-flex flex-column align-items-center mt-3">
+            <Button fullWidth className='mb-4 mt-3 bg-primary' variant="contained" size='large' onClick={handleSubmit} >Login</Button>
+            {/* <Link to={'/googleauth'} className='d-flex align-items-center mb-5'> <GoogleIcon/>Sign in with Google</Link> */}
+            <GoogleAuth className='rounded mb-4 mt-3 bg-primary containauth' />
+            <Link className='mb-4' to={'/'}>Forgot Password?</Link>
+
+            <p>Dont have an account? <Link to={'/register'}>SignUp</Link></p>
+          </div>
+
         </form>
 
-        </div>
+      </div>
     </div>
   )
 }
