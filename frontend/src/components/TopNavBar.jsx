@@ -7,7 +7,7 @@ const TopNavBar = ({header}) => {
     window.history.back(); // Navigate back using browser history
   };
   return (
-    <div className='position-relative top-0 left-0 w-100 bg-white p-3 text-center shadow-sm'>
+    <div className='position-relative top-0 left-0 w-100 p-3 text-center shadow-sm'>
         <Link onClick={goBack} className='position-absolute' style={{left:'10px', top:'10px'}}><ArrowBackIosIcon/></Link>
         <h6 className=' mb-0'>{header}</h6>
     </div>

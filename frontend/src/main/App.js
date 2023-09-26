@@ -36,6 +36,7 @@ import RouteTimetable from "../pages/BusPages/AllRouteTimetable/AllRouteTimetabl
 import OwnerBusDetails from "../pages/BusPages/BusDetails/OwnerBusDetails";
 import OwnerOview from "../pages/BusPages/Overview/OwnerOview";
 import GoogleAuth from "../pages/AuthenticationPages/GoogleAuth";
+import ConLogin from "../pages/AuthenticationPages/ConLogin";
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
         {/* check /book */}
 
         {/* Conductor Pages */}
+        <Route path="/conductor" element={<ConLogin/>}/>
         <Route path = '/route' element = {<ConRouting />} />
         <Route path='/condashboard' element={<ConDashBoard />} />
         <Route path = '/overview' element = {<Overview />} />
@@ -79,8 +81,8 @@ function App() {
         {/* Bus Pages */}
         <Route path='/busDashboard' element={<BusDashboard />} />
         <Route path='/allBusses' element={<AllBusses />} />
-        <Route path='/addConductor' element={<AddConductor />} />
-        <Route path='/routeTimetable' element={<RouteTimetable />} />
+        <Route path='/addConductor/:id' element={<AddConductor />} />
+        <Route path='/routeTimetable/:id' element={<RouteTimetable />} />
         <Route path='/ownerbusdetails/:id' element={<OwnerBusDetails />} />
         <Route path='/busOverview' element={<OwnerOview />} />
       </Routes>

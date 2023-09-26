@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv'
+dotenv.config()
 const Schema = mongoose.Schema;
 
 const busSchema = mongoose.Schema({
@@ -26,7 +28,7 @@ const busSchema = mongoose.Schema({
     },
     image:{
         type:String,
-        default: "https://freepngdownload.com/image/thumb/bus-icon-png.png"
+        default: `${process.env.FRONTEND_HOST}busPhoto.webp`
     }
 },{timestamps: true})
 

@@ -61,7 +61,7 @@ const EditProfile = () => {
     }
 
     return (
-        <div className="userProfileContainer">
+        <>
             <TopNavBar header={'Edit Profile'} />
             <div className="userProfileContents">
                 <div className="userProfileImageContainer">
@@ -146,7 +146,7 @@ const EditProfile = () => {
                     <Button onClick={()=>{window.alert('Coming Soon')}}>Change Password</Button>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

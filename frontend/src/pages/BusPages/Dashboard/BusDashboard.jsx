@@ -12,17 +12,16 @@ const BusDashboard = () => {
 
   return (
     <div className='d-flex flex-column justify-content-around align-items-center dash-container'>
-        <div className='logoContainer'>
-            <img src={ashLogo} alt="logo" className='w-100'/>
-        </div>
-        <div className='d-flex flex-wrap gap-1 justify-content-center align-items-center'>
-            <DashboardBox title={'Busses'} to={'/allBusses'} Icon={busIcon}/>
-            <DashboardBox title={'Overview'} to={'/busOverview'} Icon={overview}/>
-            <DashboardBox title={'Trips'} to={''} Icon={trips} />
-            <DashboardBox title={'Profile'} to={'/profile'} Icon = {profile}/>
-
-        </div>
-        <div><PoweredBy/></div>
+      <div className='logoContainer'>
+        <img src={ashLogo} alt="logo" className='w-100' />
+      </div>
+      <div className='d-flex flex-wrap gap-1 justify-content-center align-items-center'>
+        <DashboardBox title={'Busses'} to={'/allBusses'} Icon={busIcon} />
+        <DashboardBox title={'Overview'} to={'/busOverview'} Icon={overview} />
+        <DashboardBox title={'Trips'} to={''} Icon={trips} />
+        <DashboardBox title={'Profile'} to={'/profile'} Icon={profile} />
+      </div>
+      <div><PoweredBy /></div>
     </div>
   )
 }

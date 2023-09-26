@@ -1,5 +1,7 @@
 import BusModel from "../Models/BusModel.js"
 import { verifyToken } from "../Utils/VerifyToken.js";
+import cloudinary from '../Utils/Cloudinary.js';
+
 //GET ALL BUSSES
 export const getAllBusses = async (req, res) => {
     try {
@@ -19,28 +21,6 @@ export const getBus = async (req, res) => {
     try {
         const result = await BusModel.findById(id)
         if (result) {
-            res.status(200).json(result);
-        }
-    } catch (error) {
-        res.status(400).json({ error: error.message })
-    }
-
-}
-
-//CREATE BUS
-export const createBus = async (req, res) => {
-    if (req.body.image == "") {
-        req.body.image = "https://freepngdownload.com/image/thumb/bus-icon-png.png"
-    }
-    const newBus = req.body
-
-    try {
-        const { regNo } = newBus;
-        const isExist = await BusModel.findOne({ regNo: regNo })
-        if (isExist) {
-            res.status(409).json({ error: 'Bus Already Exist' })
-        } else {
-            const result = BusModel.create(newBus)
             res.status(200).json(result);
         }
     } catch (error) {
@@ -83,37 +63,45 @@ export const deleteBus = async (req, res) => {
 
 }
 
-//CREATE BUS WITH OWNER
 export const createBusWithOwner = async (req, res) => {
-
-    verifyToken(req).then((ownerId) => {
-        req.body.owner = ownerId
-    }).catch((error) => {
-        console.error(error);
-    });
-
     try {
-        if(req.body.busName == '' || req.body.regNo == '' || req.body.routeNo == ''){
-            throw Error('Required Fields are missing')
-        }
-        if (req.body.image == "") {
-            req.body.image = "https://freepngdownload.com/image/thumb/bus-icon-png.png"
-        }
-        const newBus = req.body
+        const secureUrl = await uploadImageToCloudinary(req.file.path);
+        const ownerId = await verifyToken(req);
 
-        const { regNo } = newBus;
-        const isExist = await BusModel.findOne({ regNo: regNo })
+        if (!req.body.busName || !req.body.regNo || !req.body.routeNo) {
+            throw new Error('Required Fields are missing');
+        }
+
+        const { regNo } = req.body;
+        const isExist = await BusModel.findOne({ regNo: regNo });
+
         if (isExist) {
-            res.status(409).json({ error: 'Bus Already Exist' })
-        } else {
-            const result = BusModel.create(newBus)
-            res.status(200).json(result);
+            return res.status(409).json({ error: 'Bus Already Exists' });
         }
-    } catch (error) {
-        res.status(400).json({ error: error.message })
-    }
 
+        req.body.image = secureUrl;
+        req.body.owner = ownerId;
+
+        const result = await BusModel.create(req.body);
+        return res.status(200).json(result);
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({ error: error.message });
+    }
+};
+
+async function uploadImageToCloudinary(filePath) {
+    return new Promise((resolve, reject) => {
+        cloudinary.uploader.upload(filePath, { folder: 'ConnectX' }, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result.secure_url);
+            }
+        });
+    });
 }
+
 
 // GET ALL BUSSES BELONG TO OWNER
 export const getAllBussesOwn = async (req, res) => {
@@ -140,3 +128,8 @@ export const getAllBussesOwn = async (req, res) => {
 //       console.log('Bus with owner:', bus);
 //     }
 //   });
+
+export const success = (req, res) => {
+    console.log(req.body);
+    res.status(200).json('File Uploaded')
+}

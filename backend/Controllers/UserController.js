@@ -7,7 +7,7 @@ import { response } from "express";
 import { AuthenticateId } from "../Utils/AuthenticateId.js";
 import { verifyToken } from "../Utils/VerifyToken.js";
 
-const createToken = (_id) => {
+export const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' })
 }
 
@@ -162,7 +162,7 @@ export const LoginUser = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            throw Error('*Username or password is incorrect!')
+            res.status(401).json({error:'*Username or password is incorrect!'})
         } else {
             const token = createToken(user._id)
             res.status(200).json({ user, token })
@@ -171,11 +171,6 @@ export const LoginUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
-
-
-
-
-
 }
 
 

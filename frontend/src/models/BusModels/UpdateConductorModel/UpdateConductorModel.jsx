@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Modal, useMantineTheme } from '@mantine/core';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -9,8 +9,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import authAxios from '../../../utils/authAxios';
 
-function UpdateConductorModel({ modalOpened, setModalOpened }) {
+function UpdateConductorModel({ modalOpened, setModalOpened, data }) {
+    const [name, setName] = useState(data.name)
+    const [nic, setNic] = useState(data.nic)
+    const [contactNo, setContactNo] = useState(data.contactNo)
+    const [regNo, setRegNo] = useState(data.regNo);
+
     const theme = useMantineTheme();
 
     const [password, setPassword] = useState(false);
@@ -23,12 +29,37 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
         event.preventDefault();
     };
 
+    const handleSubmit = async () => {
+        const dd = {
+            username : data.username,
+            name,
+            nic,
+            contactNo,
+            regNo
+        }
+        try {
+            const result = authAxios.put(`conductor/${dd.username}`,dd)
+            if(result){
+                alert('Conductor updated')
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(()=>{
+        setName(data.name)
+        setContactNo(data.contactNo)
+        setNic(data.nic)
+        setRegNo(data.regNo)
+    },[data])
+
     return (
         <Modal
             overlaycolor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
             overlayopacity={0.10}
             overlayblur={1}
-            size='80%'
+            size='100%'
             opened={modalOpened}
             onClose={() => setModalOpened(false)}
         >
@@ -42,6 +73,9 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
                         label="Name"
                         type="text"
                         variant="outlined"
+                        onChange={e => setName(e.target.value)}
+                        // defaultValue={name}
+                        value={name}
                     />
 
                     <TextField fullWidth
@@ -49,6 +83,8 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
                         label="NIC"
                         type="text"
                         variant="outlined"
+                        onChange={e => setNic(e.target.value)}
+                        value={nic}
                     />
 
                     <TextField fullWidth
@@ -56,6 +92,8 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
                         label="Contact Number"
                         type="text"
                         variant="outlined"
+                        onChange={e => setContactNo(e.target.value)}
+                        value={contactNo}
                     />
 
                     <TextField fullWidth
@@ -63,13 +101,16 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
                         label="Reg Number (Optional)"
                         type="text"
                         variant="outlined"
+                        onChange={e => setRegNo(e.target.value)}
+                        value={regNo}
                     />
 
                     <TextField fullWidth
                         disabled
                         id="outlined-disabled"
                         label="Username"
-                        defaultValue="NB6673"
+                        value={data.username}
+            
                     />
 
                     <FormControl fullWidth variant="outlined">
@@ -115,7 +156,7 @@ function UpdateConductorModel({ modalOpened, setModalOpened }) {
                     </FormControl>
                 </div>
 
-                <Button variant="contained" size='large' className='bg-primary'>UPDATE CONDUCTOR</Button>
+                <Button variant="contained" size='large' className='bg-primary' onClick={handleSubmit}> UPDATE</Button>
 
             </form>
 

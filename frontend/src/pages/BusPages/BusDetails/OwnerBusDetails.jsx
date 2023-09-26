@@ -15,7 +15,7 @@ const OwnerBusDetails = () => {
     const [bus , setBusDetails] = useState({});
 
     const timetableHandler = ()=>{
-        navigate('/routeTimetable')
+        navigate(`/routeTimetable/${id}`)
     }
 
     useEffect(()=>{
@@ -29,17 +29,18 @@ const OwnerBusDetails = () => {
 
   return (
     
-    <div>
+    <>
     <TopNavBar header={'Bus Details'}/>
-    <div className='bus-detail-container'>
-        <div className="bus-image p-4">
+    <div className='bus-detail-container bg-white'>
+        <div className="bus-image p-4 bg-info">
             <img src={bus.image} alt="bus-image" className='' />
         </div>
-        <div className="container-lg bus-model d-flex justify-content-between mt-3 p-3">
+        <div className="container-lg bus-model d-flex justify-content-between mt-3 px-3 py-1">
             <strong>{bus.busName} <span>2018</span></strong>
             <Rating name="read-only" value={ratings} readOnly />
         </div>
-        <div className="container-lg mt-3">
+        <hr/>
+        <div className="container-lg">
             <div className="row p-2">
                 <div className="col">Status</div>
                 <div className="col">Avtive</div>
@@ -75,7 +76,7 @@ const OwnerBusDetails = () => {
         </div>
     </div>
     
-    </div>
+    </>
   )
 }
 
