@@ -35,7 +35,7 @@ const AllBusses = () => {
     }, [])
 
     return (
-        <div>
+        <>
             <TopNavBar header={'All Busses'} />
             <div className="allBusses d-flex flex-column gap-3 text-center p-3">
 
@@ -52,7 +52,7 @@ const AllBusses = () => {
                     ))
                 }
             </div>
-        </div>
+        </>
     )
 }
 

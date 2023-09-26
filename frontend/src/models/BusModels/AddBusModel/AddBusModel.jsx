@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import authAxios from '../../../utils/authAxios';
+import FormData from 'form-data';
 
 function AddBusModel({ modalOpened, setModalOpened }) {
     const [busName, setBusName] = useState('');
@@ -25,14 +26,16 @@ function AddBusModel({ modalOpened, setModalOpened }) {
     const [open, setOpen] = useState(false)
     const [alertMessage, setMessage] = useState('')
     const [valid, setValid] = useState(true);
+    const [alertServity, setAlertServity] = useState('success')
+    const [imageSrc, setImageSrc] = useState();
 
     const validateInput = (input) => {
         // Define a regular expression pattern to match the desired format
         const pattern = /^[A-Z]{2}\s[A-Z]{2}\s\d{4}$/;
-    
+
         // Check if the input matches the pattern
         return pattern.test(input);
-      };
+    };
 
     const handleClose = () => {
         setModalOpened(false);
@@ -49,44 +52,93 @@ function AddBusModel({ modalOpened, setModalOpened }) {
     const handleChange = (e) => {
         const inputValue = e.target.value;
         const isValid = validateInput(inputValue);
-    
+
         // Update the state and validate
         setRegNo(inputValue);
         setValid(isValid);
-      };
+    };
 
-    const handleSubmit = async () => {
-        const newBus = {
-            busName,
-            regNo,
-            routeNo,
-            from,
-            to
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const newBus = {
+    //         busName,
+    //         regNo,
+    //         routeNo,
+    //         from,
+    //         to,
+    //         image
+    //     }
+    //     try {
+    //         const result = await authAxios.post(`bus/check`, newBus)
+    //         if (result) {
+    //             setMessage('Bus Added Successfully')
+    //             setAlertServity('success')
+    //             setOpen(true)
+    //         }
+    //     } catch (error) {
+    //         setMessage(error.response.data.error)
+    //         setAlertServity('error')
+    //         setOpen(true)
+    //     }
+    //     setTimeout(() => {
+    //         setOpen(false)
+    //     }, 2000)
+    // };
+    const previewFile = (img) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(img)
+        reader.onloadend = () => {
+            setImageSrc(reader.result)
         }
+    }
+    const handleImageChange = (event) => {
+        const file = event.target.files[0]
+        setImage(file);
+        previewFile(file)
+    };
+    const handleSubmit = async () => {
+        // Create a FormData object
+        const formData = new FormData();
+
+        // Append form data to the FormData object
+        formData.append('busName', busName);
+        formData.append('regNo', regNo);
+        formData.append('routeNo', routeNo);
+        formData.append('from', from);
+        formData.append('to', to);
+
+        // Append the image to FormData
+        formData.append('bus-image', image);
+
         try {
-            const result = await authAxios.post(`bus/create`, newBus)
+            const result = await authAxios.post(`bus/create`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data', // Set the correct content type
+                },
+            });
+
             if (result) {
-                setMessage('Bus Added Successfully')
-                setOpen(true)
+                setMessage('Bus Added Successfully');
+                setAlertServity('success');
+                setOpen(true);
             }
         } catch (error) {
-            setMessage(error.response.data.error)
-            setOpen(true)
+            setMessage(error.response.data.error);
+            setAlertServity('error');
+            setOpen(true);
         }
+
         setTimeout(() => {
-            setOpen(false)
-        }, 2000)
+            setOpen(false);
+        }, 2000);
     };
-    const handleImageChange = (event) => {
-        const selectedImage = event.target.files[0];
-        setImage(selectedImage);
-    };
+
 
     return (
         <Dialog open={modalOpened} onClose={handleClose} maxWidth="md" fullWidth>
             <DialogTitle>Add Bus</DialogTitle>
             {
-                open && <Alert severity="error">{alertMessage}</Alert>
+                open && <Alert severity={alertServity}>{alertMessage}</Alert>
             }
 
             <DialogContent>
@@ -150,8 +202,8 @@ function AddBusModel({ modalOpened, setModalOpened }) {
                 </FormControl>
                 <input
                     type="file"
+                    name='bus-image'
                     accept="image/*"
-                    style={{ display: 'none' }}
                     id="image-upload"
                     onChange={handleImageChange}
                 />
@@ -165,11 +217,15 @@ function AddBusModel({ modalOpened, setModalOpened }) {
                     </Button>
                 </label>
             </DialogContent>
+            <div style={{height:'150px'}}>
+                <img src={imageSrc} alt="" srcset="" className='w-100 h-100 object-fit-contain' />
+
+            </div>
             <DialogActions>
                 <Button onClick={handleClose} color="secondary">
                     Cancel
                 </Button>
-                <Button onClick={handleSubmit} color="primary" variant="contained">
+                <Button onClick={handleSubmit} type='submit' color="primary" variant="contained">
                     Add Bus
                 </Button>
             </DialogActions>

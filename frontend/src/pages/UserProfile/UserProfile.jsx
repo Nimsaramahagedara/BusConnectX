@@ -49,7 +49,7 @@ const UserProfile = () => {
     }, [])
 
     return (
-        <div className="userProfileContainer">
+        <>
             <TopNavBar header={'Profile'} />
             <div className="userProfileContents">
                 <div className="userProfileImageContainer">
@@ -88,7 +88,7 @@ const UserProfile = () => {
                     <Logout />
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
