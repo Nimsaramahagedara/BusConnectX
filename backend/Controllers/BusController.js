@@ -90,7 +90,7 @@ export const createBusWithOwner = async (req, res) => {
     }
 };
 
-async function uploadImageToCloudinary(filePath) {
+export const uploadImageToCloudinary =  async(filePath)=> {
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload(filePath, { folder: 'ConnectX' }, (err, result) => {
             if (err) {

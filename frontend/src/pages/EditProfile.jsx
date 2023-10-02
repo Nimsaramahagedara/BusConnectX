@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './UserProfile/UserProfile.css'
 import PersonIcon from '@mui/icons-material/Person';
@@ -12,6 +12,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import TopNavBar from '../components/TopNavBar';
 import Cookies from 'js-cookie'
 import authAxios from '../utils/authAxios';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import { handleImageChange } from '../utils/ImagePreview';
 
 const EditProfile = () => {
     const [user, setUser] = useState({
@@ -22,8 +24,12 @@ const EditProfile = () => {
         userType: '',
         email: '',
         password: '',
-        Image: ''
     });
+    const [image, setImage] = useState('');
+    const [imageSrc, setImageSrc] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
+
+
+    
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -32,8 +38,9 @@ const EditProfile = () => {
             try {
                 const token = Cookies.get('token');
                 if (token) {
-                    const user =await authAxios.get('/user')
+                    const user = await authAxios.get('/user')
                     setUser(user.data);
+                    setImageSrc(user.data.image)
                 } else {
                     navigate('./login')
                 }
@@ -51,9 +58,24 @@ const EditProfile = () => {
         setUser({ ...user, [name]: value });
     };
 
-    const handleUpdate = async()=>{
+    const handleUpdate = async () => {
+        const formData = new FormData();
+
+        // Append form data to the FormData object
+        formData.append('firstName', user.firstName);
+        formData.append('lastName', user.lastName);
+        formData.append('contactNumber', user.contactNumber);
+        formData.append('email', user.email);
+
+        // Append the image to FormData
+        formData.append('image', image);
         try {
-            const res = await authAxios.put(`user/update/${user._id}`,user)
+            const res = await authAxios.put(`user/update/${user._id}`, formData,{
+                headers:{
+                    'Content-Type':'multipart/form-data'
+                }
+            })
+            console.log(res);
             navigate('../profile')
         } catch (error) {
             console.log(error);
@@ -65,12 +87,30 @@ const EditProfile = () => {
             <TopNavBar header={'Edit Profile'} />
             <div className="userProfileContents">
                 <div className="userProfileImageContainer">
-                    <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' alt='' />
+                    <div className='rounded' style={{aspectRatio:'1/1', height:'200px'}}>
+                    <img src={imageSrc} className='w-100 h-100 object-fit-contain' />
+                    </div>
+                    
 
                     <div className="profileEditIcon">
                         <IconButton color="primary" aria-label="add to shopping cart">
-                            <EditIcon fontSize='large' />
-                        </IconButton>
+                            <input
+                                style={{ display: 'none' }}
+                                type="file"
+                                name='bus-image'
+                                accept="image/*"
+                                id="image-upload"
+                                onChange={e=> handleImageChange(e,setImage,setImageSrc)}
+                            />
+                            <label htmlFor="image-upload">
+                                <Button
+                                    component="span"
+                                    variant="contained"
+                                    startIcon={<EditIcon fontSize='large' />}
+                                >
+                                    Upload Image
+                                </Button>
+                            </label>                        </IconButton>
                     </div>
                 </div>
 
@@ -137,13 +177,13 @@ const EditProfile = () => {
                             value={user.password}
                             onChange={handleInputChange}
                         /> */}
-                        
+
                     </div>
                 </div>
 
                 <div className="userProfileActionsContainer">
                     <Button fullWidth variant="contained" className='mainBtn' onClick={handleUpdate}>SAVE</Button>
-                    <Button onClick={()=>{window.alert('Coming Soon')}}>Change Password</Button>
+                    <Button onClick={() => { window.alert('Coming Soon') }}>Change Password</Button>
                 </div>
             </div>
         </>

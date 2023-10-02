@@ -6,6 +6,7 @@ import router from "../Routes/UserRoutes.js";
 import { response } from "express";
 import { AuthenticateId } from "../Utils/AuthenticateId.js";
 import { verifyToken } from "../Utils/VerifyToken.js";
+import { uploadImageToCloudinary } from "./BusController.js";
 
 export const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' })
@@ -110,8 +111,11 @@ export const viewUserLogged = async (req, res) => {
 //update user 
 export const editUser = async (req, res) => {
     try {
+        console.log(req);
+        const secureUrl =await uploadImageToCloudinary(req.file.path)
         const { id } = req.params;
-        const { firstName, email, lastName, contactNumber, gender, userType, password, image } = req.body;
+        const { firstName, email, lastName, contactNumber, gender, userType, password} = req.body;
+
         // res.json({ userId, firstName, email });
         // console.log(response)
 
@@ -130,7 +134,7 @@ export const editUser = async (req, res) => {
         //user.gender=gender;
         //user.userType=userType;
         // user.password=password;
-        //user.image=image;
+        user.image=secureUrl;
 
 
 

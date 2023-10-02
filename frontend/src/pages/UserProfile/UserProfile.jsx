@@ -21,7 +21,7 @@ const UserProfile = () => {
         userType: 'Passenger',
         email: 'Email',
         password: ' ',
-        Image: ' '
+        image: ' '
     });
 
     const navigate = useNavigate()
@@ -52,8 +52,11 @@ const UserProfile = () => {
         <>
             <TopNavBar header={'Profile'} />
             <div className="userProfileContents">
-                <div className="userProfileImageContainer">
-                    <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' alt='' />
+                <div className="userProfileImageContainer"  >
+                    <div style={{aspectRatio:'1/1', height:'200px'}}>
+                    <img src={user.image} className='w-100 h-100 object-fit-contain' />
+                    </div>
+                    
 
                     <div className="mainCredentials">
                         <h4>{user.firstName + ' ' + user.lastName}</h4>
