@@ -27,7 +27,7 @@ function AddBusModel({ modalOpened, setModalOpened }) {
     const [alertMessage, setMessage] = useState('')
     const [valid, setValid] = useState(true);
     const [alertServity, setAlertServity] = useState('success')
-    const [imageSrc, setImageSrc] = useState();
+    const [imageSrc, setImageSrc] = useState('https://www.freeiconspng.com/thumbs/bus-png/bus-png-15.png');
 
     const validateInput = (input) => {
         // Define a regular expression pattern to match the desired format
@@ -58,32 +58,7 @@ function AddBusModel({ modalOpened, setModalOpened }) {
         setValid(isValid);
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const newBus = {
-    //         busName,
-    //         regNo,
-    //         routeNo,
-    //         from,
-    //         to,
-    //         image
-    //     }
-    //     try {
-    //         const result = await authAxios.post(`bus/check`, newBus)
-    //         if (result) {
-    //             setMessage('Bus Added Successfully')
-    //             setAlertServity('success')
-    //             setOpen(true)
-    //         }
-    //     } catch (error) {
-    //         setMessage(error.response.data.error)
-    //         setAlertServity('error')
-    //         setOpen(true)
-    //     }
-    //     setTimeout(() => {
-    //         setOpen(false)
-    //     }, 2000)
-    // };
+
     const previewFile = (img) => {
         const reader = new FileReader()
         reader.readAsDataURL(img)
@@ -140,6 +115,28 @@ function AddBusModel({ modalOpened, setModalOpened }) {
             {
                 open && <Alert severity={alertServity}>{alertMessage}</Alert>
             }
+            <div style={{ height: '150px' }} className='position-relative w-max'>
+                <div className="position-absolute" style={{top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'max-content'}}>
+                    <input
+                        style={{ display: 'none' }}
+                        type="file"
+                        name='bus-image'
+                        accept="image/*"
+                        id="image-upload"
+                        onChange={handleImageChange}
+                    />
+                    <label htmlFor="image-upload">
+                        <Button
+                            component="span"
+                            variant="contained"
+                            startIcon={<CameraAltIcon />}
+                        >
+                            Upload Image
+                        </Button>
+                    </label>
+                </div>
+                <img src={imageSrc} className='w-100 h-100 object-fit-contain' />
+            </div>
 
             <DialogContent>
                 <TextField
@@ -200,27 +197,7 @@ function AddBusModel({ modalOpened, setModalOpened }) {
                         <MenuItem value="Jaffna">Jaffna</MenuItem>
                     </Select>
                 </FormControl>
-                <input
-                    type="file"
-                    name='bus-image'
-                    accept="image/*"
-                    id="image-upload"
-                    onChange={handleImageChange}
-                />
-                <label htmlFor="image-upload">
-                    <Button
-                        component="span"
-                        variant="outlined"
-                        startIcon={<CameraAltIcon />}
-                    >
-                        Upload Image
-                    </Button>
-                </label>
             </DialogContent>
-            <div style={{height:'150px'}}>
-                <img src={imageSrc} alt="" srcset="" className='w-100 h-100 object-fit-contain' />
-
-            </div>
             <DialogActions>
                 <Button onClick={handleClose} color="secondary">
                     Cancel
