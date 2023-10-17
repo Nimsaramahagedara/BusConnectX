@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import LockIcon from '@mui/icons-material/Lock';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
-import GoogleAuth from './GoogleAuth';
+//import GoogleAuth from './GoogleAuth';
 import './Authentication.css'
 import Cookies from 'js-cookie';
 import { Alert } from '@mui/material';
@@ -87,7 +87,7 @@ const Login = () => {
           <div className="text-content d-flex flex-column align-items-center mt-3">
             <Button fullWidth className='mb-4 mt-3 bg-primary' variant="contained" size='large' onClick={handleSubmit} >Login</Button>
             {/* <Link to={'/googleauth'} className='d-flex align-items-center mb-5'> <GoogleIcon/>Sign in with Google</Link> */}
-            <GoogleAuth className='rounded mb-4 mt-3 bg-primary containauth' />
+            {/* <GoogleAuth className='rounded mb-4 mt-3 bg-primary containauth' /> */}
             <Link className='mb-4' to={'/'}>Forgot Password?</Link>
 
             <p>Dont have an account? <Link to={'/register'}>SignUp</Link></p>

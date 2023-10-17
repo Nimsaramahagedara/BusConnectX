@@ -16,7 +16,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import authAxios from '../../../utils/authAxios';
 import FormData from 'form-data';
 
-function AddBusModel({ modalOpened, setModalOpened }) {
+function AddBusModel({ modalOpened, setModalOpened, refreshPage }) {
     const [busName, setBusName] = useState('');
     const [regNo, setRegNo] = useState('');
     const [routeNo, setRouteNo] = useState('');
@@ -95,7 +95,9 @@ function AddBusModel({ modalOpened, setModalOpened }) {
             if (result) {
                 setMessage('Bus Added Successfully');
                 setAlertServity('success');
+                refreshPage()
                 setOpen(true);
+                handleClose()
             }
         } catch (error) {
             setMessage(error.response.data.error);
