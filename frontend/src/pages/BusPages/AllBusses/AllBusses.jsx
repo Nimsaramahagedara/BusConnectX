@@ -15,8 +15,12 @@ const AllBusses = () => {
 
     const [addBusModalOpened, setAddBusModalOpened] = useState(false)
     const [allBus, setAllBus] = useState([])
+    const [refresh, setRefresh] = useState(false)
     const navigate = useNavigate()
-
+    const refreshPage = ()=>{
+        setRefresh((prev)=>!prev)
+        console.log('Page Refresh');
+    }
     const busHandler = () => {
         setAddBusModalOpened(true)
     }
@@ -32,7 +36,7 @@ const AllBusses = () => {
             }
         }
         getAll();  
-    }, [])
+    }, [refresh])
 
     return (
         <>
@@ -44,6 +48,7 @@ const AllBusses = () => {
                 <AddBusModel
                     setModalOpened={setAddBusModalOpened}
                     modalOpened={addBusModalOpened}
+                    refreshPage={refreshPage}
                 />
 
                 {

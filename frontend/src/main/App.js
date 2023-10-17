@@ -37,12 +37,19 @@ import OwnerBusDetails from "../pages/BusPages/BusDetails/OwnerBusDetails";
 import OwnerOview from "../pages/BusPages/Overview/OwnerOview";
 import GoogleAuth from "../pages/AuthenticationPages/GoogleAuth";
 import ConLogin from "../pages/AuthenticationPages/ConLogin";
+import AdminDashboard from "../layout/Layout";
+import Router, { IndexPage} from "../routes/sections";
+import AdminApp from "../app";
+import AdminRouter from "../routes/sections";
+//import DashboardLayout from "../layouts/dashboard";
+import { element } from "prop-types";
+
 
 
 function App() {
 
   return (
-    <div className="App">
+    <>
       <Routes>
         <Route path='*' element={<NotFound />} />
         <Route path='/' element={<LandingPage />} />
@@ -86,8 +93,14 @@ function App() {
         <Route path='/routeTimetable/:id' element={<RouteTimetable />} />
         <Route path='/ownerbusdetails/:id' element={<OwnerBusDetails />} />
         <Route path='/busOverview' element={<OwnerOview />} />
+
+
+        {/*Admin Pages*/}
+        {/* <Route path="/admin" element={<AdminDashboard/>}></Route> */}
+        <Route path="/admin/*" element={<AdminApp/>}></Route>
+       
       </Routes>
-    </div>
+    </>
   );
 }
 

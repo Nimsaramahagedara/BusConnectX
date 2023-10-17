@@ -5,6 +5,7 @@ import UpdateTimetableModel from '../../../models/BusModels/UpdateTimetableModel
 import { useParams } from 'react-router-dom';
 import authAxios from '../../../utils/authAxios';
 
+
 const RouteTimetable = () => {
     const {id} = useParams()
     const[modalOpened,setModalOpened] = useState(false)
@@ -49,9 +50,11 @@ const RouteTimetable = () => {
                 <div className='d-flex flex-column gap-1 text-center mt-3'>
                     <h4 className='mb-0'>{bus.busName}</h4>
                     <span className='mb-2'>{bus.regNo}</span>
-                    <h5>All Routes Timetable</h5>
                 </div>
-
+                <div className="d-flex align-items-center justify-content-between">
+                    <h6>All Routes Timetable</h6>
+                    <Button variant='contained' className='bg-primary' size='small'>Time Slot +</Button>
+                </div>
                 <div className='routeUpdBtn mt-2 d-flex gap-2 p-3 justify-content-between align-items-center shadow-sm bg-white rounded'>
                     <div>
                         <h5>Matara - Colombo</h5>
